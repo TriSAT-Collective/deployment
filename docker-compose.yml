@@ -80,6 +80,9 @@ services:
     networks:
       - fh
 
+  simulation:
+    image: ghcr.io/trisat-collective/energy-simulator:1.4.3
+
 networks:
   fh:
     name: ${PREFIX:-fh-}network
