@@ -4,7 +4,7 @@ services:
     container_name: ${PREFIX:-fh-}rabbitmq
     restart: unless-stopped
     volumes:
-        ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     ports:
       - 5672:5672
       - 15672:15672
