@@ -83,7 +83,7 @@ services:
   #simulation:
     #image: ghcr.io/trisat-collective/energy-simulator:1.4.3
   simulation:
-    image: ghcr.io/trisat-collective/smart-meter-simulation:1.4.1
+    image: ghcr.io/trisat-collective/smart-meter-simulation:1.4.2
 
 
 
