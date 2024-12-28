@@ -3,6 +3,9 @@ services:
     image: rabbitmq:3.13-management
     container_name: ${PREFIX:-fh-}rabbitmq
     restart: unless-stopped
+    environment:
+      RABBITMQ_USERNAME: ${RABBITMQ_USERNAME}
+      RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
     volumes:
       - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
     ports:
