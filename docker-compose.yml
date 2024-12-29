@@ -8,6 +8,8 @@ services:
       RABBITMQ_PASSWORD: ${RABBITMQ_PASSWORD}
     volumes:
       - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
+      - ./config/rabbitmq_definitions.json:/etc/rabbitmq/rabbitmq_definitions.json
+
     ports:
       - 5672:5672
       - 15672:15672
@@ -84,11 +86,9 @@ services:
       - fh
 
   #simulation:
-    #image: ghcr.io/trisat-collective/energy-simulator:1.4.3
-  simulation:
-    image: ghcr.io/trisat-collective/smart-meter-simulation:1.4.4
-
-
+  #image: ghcr.io/trisat-collective/energy-simulator:1.4.3
+  # simulation:
+  #   image: ghcr.io/trisat-collective/smart-meter-simulation:1.4.4
 
 networks:
   fh:
