@@ -64,7 +64,7 @@ services:
       - fh
 
   keycloak:
-    image: quay.io/keycloak/keycloak:25.0.5
+    image: quay.io/keycloak/keycloak:25.0.6
     container_name: ${PREFIX:-fh-}keycloak
     command:
       - start-dev
