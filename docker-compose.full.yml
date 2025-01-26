@@ -8,7 +8,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data/mongo/data:/data/db
+      - mongo-data:/data/db
     networks:
       - fh
     healthcheck:
@@ -55,7 +55,7 @@ services:
     image: postgres:16.2
     container_name: ${PREFIX:-fh-}postgres
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -90,11 +90,11 @@ services:
     environment:
       - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
     volumes:
-      - ./data/grafana/data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
     networks:
       - fh
 
-  smart-meter-simulation:
+  smart-meter-simulation-1:
     image: ghcr.io/trisat-collective/smart-meter-simulation:1.9.0
     environment:
       APPSETTINGS__RABBITMQ__URI: amqp://rabbitmq
@@ -103,7 +103,30 @@ services:
         condition: service_healthy
       smart-meter-collector:
         condition: service_started
+    networks:
+      - fh
 
+  smart-meter-simulation-2:
+    image: ghcr.io/trisat-collective/smart-meter-simulation:1.9.0
+    environment:
+      APPSETTINGS__RABBITMQ__URI: amqp://rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      smart-meter-collector:
+        condition: service_started
+    networks:
+      - fh
+
+  smart-meter-simulation-3:
+    image: ghcr.io/trisat-collective/smart-meter-simulation:1.9.0
+    environment:
+      APPSETTINGS__RABBITMQ__URI: amqp://rabbitmq
+    depends_on:
+      rabbitmq:
+        condition: service_healthy
+      smart-meter-collector:
+        condition: service_started
     networks:
       - fh
 
@@ -129,6 +152,11 @@ services:
         condition: service_healthy
     networks:
       - fh
+
+volumes:
+  grafana-data:
+  postgres-data:
+  mongo-data:
 
 networks:
   fh:

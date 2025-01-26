@@ -9,7 +9,6 @@ services:
     volumes:
       - ./config/rabbitmq.conf:/etc/rabbitmq/rabbitmq.conf
       - ./config/rabbitmq_definitions.json:/etc/rabbitmq/rabbitmq_definitions.json
-
     ports:
       - 5672:5672
       - 15672:15672
@@ -25,7 +24,7 @@ services:
     ports:
       - 27017:27017
     volumes:
-      - ./data/mongo/data:/data/db
+      - mongo-data:/data/db
     networks:
       - fh
 
@@ -46,7 +45,7 @@ services:
     image: postgres:16.2
     container_name: ${PREFIX:-fh-}postgres
     volumes:
-      - ./data/postgres/data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_DB: keycloak
       POSTGRES_USER: keycloak
@@ -81,7 +80,7 @@ services:
     environment:
       - GF_INSTALL_PLUGINS=yesoreyeram-infinity-datasource
     volumes:
-      - ./data/grafana/data:/var/lib/grafana
+      - grafana-data:/var/lib/grafana
     networks:
       - fh
 
@@ -89,6 +88,11 @@ services:
   #image: ghcr.io/trisat-collective/energy-simulator:1.4.3
   # simulation:
   #   image: ghcr.io/trisat-collective/smart-meter-simulation:1.4.4
+
+volumes:
+  grafana-data:
+  postgres-data:
+  mongo-data:
 
 networks:
   fh:
