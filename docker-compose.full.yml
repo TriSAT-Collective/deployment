@@ -153,6 +153,19 @@ services:
     networks:
       - fh
 
+  api-data-access:
+    image: ghcr.io/trisat-collective/api-data-access:1.1.1
+    ports:
+      - 8888:8080
+    environment:
+      APPSETTINGS__MONGODB__CONNECTIONSTRING: mongodb://root:password@mongo:27017
+      APPSETTINGS__API__APIKEY: this-is-just-a-test-key
+    depends_on:
+      mongo:
+        condition: service_healthy
+    networks:
+      - fh
+
 volumes:
   grafana-data:
   postgres-data:
