@@ -131,7 +131,7 @@ services:
       - fh
 
   smart-meter-collector:
-    image: ghcr.io/trisat-collective/smart-meter-collector:1.5.0
+    image: ghcr.io/trisat-collective/smart-meter-collector:1.5.1
     environment:
       APPSETTINGS__RABBITMQ__URI: amqp://rabbitmq
       APPSETTINGS__MONGODB__CONNECTIONSTRING: mongodb://root:password@mongo:27017
