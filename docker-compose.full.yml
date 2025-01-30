@@ -18,7 +18,7 @@ services:
       retries: 3
 
   rabbitmq:
-    image: rabbitmq:3.13-management
+    image: rabbitmq:4.0-management
     container_name: ${PREFIX:-fh-}rabbitmq
     restart: unless-stopped
     environment:
