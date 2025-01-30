@@ -42,7 +42,7 @@ services:
       - fh
 
   postgres:
-    image: postgres:16.2
+    image: postgres:16.6
     container_name: ${PREFIX:-fh-}postgres
     volumes:
       - postgres-data:/var/lib/postgresql/data
